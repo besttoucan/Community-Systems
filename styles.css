@@ -180,11 +180,20 @@ html{scrollbar-width:thin;scrollbar-color:#0082CD #eef2f7}
 @media(max-width:840px){.split{grid-template-columns:1fr;gap:1.5rem}}
 
 /* dark CTA */
-.cta-dark{background:var(--navy-grad);color:#fff}
+.cta-dark{position:relative;overflow:hidden;background:var(--navy-grad);color:#fff}
 .cta-dark h2{color:#fff}
-.cta-dark p{color:rgba(255,255,255,.85);max-width:60ch;margin-inline:auto}
-.cta-dark .wrap{text-align:center}
-.cta-dark .lead{color:rgba(255,255,255,.85);margin-inline:auto}
+.cta-dark p{color:rgba(255,255,255,.88);max-width:60ch;margin-inline:auto}
+.cta-dark .wrap{position:relative;z-index:1;text-align:center}
+.cta-dark .lead{color:rgba(255,255,255,.88);margin-inline:auto}
+/* drifting brand-color aurora glows behind the CTA */
+.cta-dark::before,.cta-dark::after{content:"";position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:0}
+.cta-dark::before{width:540px;height:540px;top:-200px;left:-140px;
+  background:radial-gradient(circle,rgba(0,130,205,.55),rgba(0,130,205,0) 70%);animation:ctaGlowA 15s ease-in-out infinite}
+.cta-dark::after{width:480px;height:480px;bottom:-220px;right:-120px;
+  background:radial-gradient(circle,rgba(255,120,67,.5),rgba(255,120,67,0) 70%);animation:ctaGlowB 18s ease-in-out infinite}
+@keyframes ctaGlowA{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(70px,50px) scale(1.12)}}
+@keyframes ctaGlowB{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-60px,-40px) scale(1.1)}}
+@media(prefers-reduced-motion:reduce){.cta-dark::before,.cta-dark::after{animation:none}}
 
 /* relationship note block */
 .relnote{background:var(--soft);border:1px solid var(--line);border-radius:var(--radius);padding:1.4rem 1.5rem}
@@ -241,7 +250,7 @@ html{scrollbar-width:thin;scrollbar-color:#0082CD #eef2f7}
 .foot a:hover{color:#fff}
 .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.16)}
 .foot-brand{display:flex;align-items:center;gap:.6rem;color:#fff;font-weight:700;margin-bottom:.8rem}
-.foot-brand img{width:28px;height:28px}
+.foot-brand img{width:36px;height:36px;background:#fff;border-radius:9px;padding:5px;box-shadow:0 2px 10px rgba(0,0,0,.22)}
 .foot-tag{color:rgba(255,255,255,.7);max-width:34ch;margin:0 0 1rem}
 .foot-contact{color:rgba(255,255,255,.75)}
 .foot-contact div{margin-bottom:.25rem}
