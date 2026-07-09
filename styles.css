@@ -42,6 +42,13 @@ strong{color:var(--navy)}
 .skip{position:absolute;left:-9999px;top:0;background:var(--navy);color:#fff;padding:.5rem 1rem;z-index:200}
 .skip:focus{left:0}
 
+/* ---------- Scrollbar (branded) ---------- */
+html{scrollbar-width:thin;scrollbar-color:#0082CD #eef2f7}
+::-webkit-scrollbar{width:12px;height:12px}
+::-webkit-scrollbar-track{background:#eef2f7}
+::-webkit-scrollbar-thumb{background:#0082CD;border-radius:7px;border:3px solid #eef2f7}
+::-webkit-scrollbar-thumb:hover{background:#003A77}
+
 .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.1rem,4vw,2rem)}
 .band{padding:clamp(3.5rem,7vw,6rem) 0}
 .band.soft{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
