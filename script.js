@@ -225,35 +225,21 @@
     onScroll();
   })();
 
-  // ---- Contact form (FormSubmit AJAX; graceful no-JS fallback if action set) ----
+  // ---- Contact form (native FormSubmit POST) ----
+  // We let the browser submit directly to FormSubmit rather than using a
+  // background fetch: FormSubmit sits behind Cloudflare bot-protection, which
+  // a real page navigation clears automatically but a background request cannot.
+  // FormSubmit redirects back here with ?sent=1 (via the _next field) on success.
   var form = document.querySelector("#contact-form");
   if (form) {
     var ok = document.querySelector(".form-ok");
-    // No-JS fallback lands back here with ?sent=1 via the _next field
-    if (ok && /[?&]sent=1/.test(location.search)) ok.classList.add("show");
-    form.addEventListener("submit", function (e) {
-      var action = form.getAttribute("action") || "";
-      if (!/formsubmit\.co/.test(action)) return; // let other backends submit natively
-      e.preventDefault();
+    if (ok && /[?&]sent=1/.test(location.search)) {
+      ok.classList.add("show");
+      ok.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    form.addEventListener("submit", function () {
       var btn = form.querySelector("button[type=submit]");
-      if (btn) { btn.disabled = true; btn.dataset.t = btn.textContent; btn.textContent = "Sending…"; }
-      fetch(action.replace("formsubmit.co/", "formsubmit.co/ajax/"), {
-        method: "POST", headers: { "Accept": "application/json" }, body: new FormData(form)
-      }).then(function (r) {
-        return r.json().catch(function () { return {}; }).then(function (data) {
-          if (!r.ok || String(data.success) === "false") throw new Error(data.message || "Submission failed");
-        });
-      })
-        .then(function () {
-          if (ok) {
-            ok.textContent = "Thank you. Genesis Community Systems has received your request. We will review the information and respond shortly if there appears to be a potential fit for an introductory conversation.";
-            ok.classList.add("show");
-            ok.scrollIntoView({ behavior: "smooth", block: "center" });
-          }
-          form.reset();
-        })
-        .catch(function () { if (ok) { ok.textContent = "Something went wrong. Please email genesis@genesiscommunitysystems.com."; ok.classList.add("show"); } })
-        .finally(function () { if (btn) { btn.disabled = false; btn.textContent = btn.dataset.t || "Submit"; } });
+      if (btn) { btn.textContent = "Sending…"; }
     });
   }
 })();
