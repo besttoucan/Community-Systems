@@ -22,9 +22,16 @@
   }
 
   // ---- Mark active nav link ----
-  var path = location.pathname.split("/").pop() || "index.html";
+  // Normalize both the URL and each link to a bare page key so clean URLs
+  // (/how-it-works), legacy .html URLs, and the "/" home all match correctly.
+  function pageKey(p) {
+    p = (p || "").split("?")[0].split("#")[0].replace(/\/+$/, "");
+    p = p.split("/").pop().replace(/\.html$/, "");
+    return p || "index";
+  }
+  var current = pageKey(location.pathname);
   document.querySelectorAll(".menu a:not(.btn)").forEach(function (a) {
-    if (a.getAttribute("href") === path) a.classList.add("active");
+    if (pageKey(a.getAttribute("href")) === current) a.classList.add("active");
   });
 
   // ---- Subtle reveal on scroll (one-time, respects reduced motion) ----
