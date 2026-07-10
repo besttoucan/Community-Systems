@@ -112,7 +112,7 @@ html{scrollbar-width:thin;scrollbar-color:#0082CD #eef2f7}
 .hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:1.3rem}
 .trustline{font-size:.92rem;color:var(--faint);display:flex;align-items:flex-start;gap:.5rem;max-width:52ch}
 .trustline svg{flex:none;margin-top:2px;color:var(--blue)}
-@media(max-width:840px){.hero-grid{grid-template-columns:1fr}.hero-visual{order:-1}}
+@media(max-width:840px){.hero-grid{grid-template-columns:1fr}}
 
 /* ---------- Hero diagram ---------- */
 .diagram{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.6rem 1.4rem;box-shadow:var(--shadow)}
