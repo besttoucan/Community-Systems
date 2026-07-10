@@ -125,7 +125,7 @@ html{scrollbar-width:thin;scrollbar-color:#0082CD #eef2f7}
 .dnode.legacy .chip{color:#b23b1e}
 .dnode.process{background:var(--navy);border-color:var(--navy)}
 .dnode.process b,.dnode.process small{color:#fff}
-.dnode.process .mark{width:34px;height:34px;margin:0 auto .5rem}
+.dnode.process .mark{width:40px;height:40px;margin:0 auto .6rem;background:#fff;border-radius:9px;padding:5px;box-shadow:0 2px 10px rgba(0,0,0,.25)}
 .dnode.forward{background:#eef6fc;border-color:#d4e8f6}
 .dnode.forward b{color:var(--blue)}
 .darrow{color:var(--blue-2);font-size:1.2rem;line-height:1;display:flex;justify-content:center}
